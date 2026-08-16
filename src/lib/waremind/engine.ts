@@ -280,9 +280,7 @@ export function metrics(state: WarehouseState) {
     pendingPicking: 30 + orders.filter((o) => o.status === "picking" || o.status === "allocated").length,
     pendingPacking: 18 + orders.filter((o) => o.status === "packing").length,
     readyDispatch: 12 + orders.filter((o) => o.status === "ready-dispatch").length,
-    fulfillmentRate: Math.round(
-      ((88 + dispatched) / (96 + orders.filter((o) => o.status !== "dispatched").length * 0.35)) * 100,
-    ),
+    fulfillmentRate: Math.min(99, 89 + dispatched),
     activeExceptions: state.exceptions.filter((e) => e.status !== "resolved").length,
   };
 }

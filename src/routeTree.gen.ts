@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AllocationRouteImport } from './routes/allocation'
+import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as DecisionsRouteImport } from './routes/decisions'
 import { Route as DispatchRouteImport } from './routes/dispatch'
 import { Route as ExceptionsRouteImport } from './routes/exceptions'
@@ -18,6 +20,7 @@ import { Route as InventoryRouteImport } from './routes/inventory'
 import { Route as PackingRouteImport } from './routes/packing'
 import { Route as PickingRouteImport } from './routes/picking'
 import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as SimulatorRouteImport } from './routes/simulator'
 import { Route as OrdersIndexRouteImport } from './routes/orders.index'
 import { Route as OrdersOrderIdRouteImport } from './routes/orders.$orderId'
 
@@ -29,6 +32,16 @@ const IndexRoute = IndexRouteImport.update({
 const AllocationRoute = AllocationRouteImport.update({
   id: '/allocation',
   path: '/allocation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalyticsRoute = AnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssistantRoute = AssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DecisionsRoute = DecisionsRouteImport.update({
@@ -66,6 +79,11 @@ const SettingsRoute = SettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SimulatorRoute = SimulatorRouteImport.update({
+  id: '/simulator',
+  path: '/simulator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OrdersIndexRoute = OrdersIndexRouteImport.update({
   id: '/orders/',
   path: '/orders/',
@@ -80,6 +98,8 @@ const OrdersOrderIdRoute = OrdersOrderIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/allocation': typeof AllocationRoute
+  '/analytics': typeof AnalyticsRoute
+  '/assistant': typeof AssistantRoute
   '/decisions': typeof DecisionsRoute
   '/dispatch': typeof DispatchRoute
   '/exceptions': typeof ExceptionsRoute
@@ -87,12 +107,15 @@ export interface FileRoutesByFullPath {
   '/packing': typeof PackingRoute
   '/picking': typeof PickingRoute
   '/settings': typeof SettingsRoute
+  '/simulator': typeof SimulatorRoute
   '/orders/$orderId': typeof OrdersOrderIdRoute
   '/orders/': typeof OrdersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/allocation': typeof AllocationRoute
+  '/analytics': typeof AnalyticsRoute
+  '/assistant': typeof AssistantRoute
   '/decisions': typeof DecisionsRoute
   '/dispatch': typeof DispatchRoute
   '/exceptions': typeof ExceptionsRoute
@@ -100,6 +123,7 @@ export interface FileRoutesByTo {
   '/packing': typeof PackingRoute
   '/picking': typeof PickingRoute
   '/settings': typeof SettingsRoute
+  '/simulator': typeof SimulatorRoute
   '/orders/$orderId': typeof OrdersOrderIdRoute
   '/orders': typeof OrdersIndexRoute
 }
@@ -107,6 +131,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/allocation': typeof AllocationRoute
+  '/analytics': typeof AnalyticsRoute
+  '/assistant': typeof AssistantRoute
   '/decisions': typeof DecisionsRoute
   '/dispatch': typeof DispatchRoute
   '/exceptions': typeof ExceptionsRoute
@@ -114,6 +140,7 @@ export interface FileRoutesById {
   '/packing': typeof PackingRoute
   '/picking': typeof PickingRoute
   '/settings': typeof SettingsRoute
+  '/simulator': typeof SimulatorRoute
   '/orders/$orderId': typeof OrdersOrderIdRoute
   '/orders/': typeof OrdersIndexRoute
 }
@@ -122,6 +149,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/allocation'
+    | '/analytics'
+    | '/assistant'
     | '/decisions'
     | '/dispatch'
     | '/exceptions'
@@ -129,12 +158,15 @@ export interface FileRouteTypes {
     | '/packing'
     | '/picking'
     | '/settings'
+    | '/simulator'
     | '/orders/$orderId'
     | '/orders/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/allocation'
+    | '/analytics'
+    | '/assistant'
     | '/decisions'
     | '/dispatch'
     | '/exceptions'
@@ -142,12 +174,15 @@ export interface FileRouteTypes {
     | '/packing'
     | '/picking'
     | '/settings'
+    | '/simulator'
     | '/orders/$orderId'
     | '/orders'
   id:
     | '__root__'
     | '/'
     | '/allocation'
+    | '/analytics'
+    | '/assistant'
     | '/decisions'
     | '/dispatch'
     | '/exceptions'
@@ -155,6 +190,7 @@ export interface FileRouteTypes {
     | '/packing'
     | '/picking'
     | '/settings'
+    | '/simulator'
     | '/orders/$orderId'
     | '/orders/'
   fileRoutesById: FileRoutesById
@@ -162,6 +198,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AllocationRoute: typeof AllocationRoute
+  AnalyticsRoute: typeof AnalyticsRoute
+  AssistantRoute: typeof AssistantRoute
   DecisionsRoute: typeof DecisionsRoute
   DispatchRoute: typeof DispatchRoute
   ExceptionsRoute: typeof ExceptionsRoute
@@ -169,6 +207,7 @@ export interface RootRouteChildren {
   PackingRoute: typeof PackingRoute
   PickingRoute: typeof PickingRoute
   SettingsRoute: typeof SettingsRoute
+  SimulatorRoute: typeof SimulatorRoute
   OrdersOrderIdRoute: typeof OrdersOrderIdRoute
   OrdersIndexRoute: typeof OrdersIndexRoute
 }
@@ -187,6 +226,20 @@ declare module '@tanstack/react-router' {
       path: '/allocation'
       fullPath: '/allocation'
       preLoaderRoute: typeof AllocationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analytics': {
+      id: '/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assistant': {
+      id: '/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/decisions': {
@@ -238,6 +291,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/simulator': {
+      id: '/simulator'
+      path: '/simulator'
+      fullPath: '/simulator'
+      preLoaderRoute: typeof SimulatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/orders/': {
       id: '/orders/'
       path: '/orders'
@@ -258,6 +318,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AllocationRoute: AllocationRoute,
+  AnalyticsRoute: AnalyticsRoute,
+  AssistantRoute: AssistantRoute,
   DecisionsRoute: DecisionsRoute,
   DispatchRoute: DispatchRoute,
   ExceptionsRoute: ExceptionsRoute,
@@ -265,6 +327,7 @@ const rootRouteChildren: RootRouteChildren = {
   PackingRoute: PackingRoute,
   PickingRoute: PickingRoute,
   SettingsRoute: SettingsRoute,
+  SimulatorRoute: SimulatorRoute,
   OrdersOrderIdRoute: OrdersOrderIdRoute,
   OrdersIndexRoute: OrdersIndexRoute,
 }

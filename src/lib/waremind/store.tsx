@@ -84,7 +84,7 @@ export function WarehouseProvider({ children }: { children: ReactNode }) {
             label: line.allocated > 0 ? `Allocated ${line.allocated} × ${sku}` : `Held — awaiting stock (${sku})`,
             detail: line.action,
             actor: "WAREMIND Engine",
-            kind: (line.allocated > 0 ? "resolution" : "info") as const,
+            kind: line.allocated > 0 ? ("resolution" as const) : ("info" as const),
           },
         ],
       };
@@ -252,7 +252,7 @@ export function WarehouseProvider({ children }: { children: ReactNode }) {
                   at: Date.now(),
                   label: `Item ${sku} marked ${result}`,
                   actor: "Picker",
-                  kind: (result === "picked" ? "info" : "exception") as const,
+                  kind: result === "picked" ? ("info" as const) : ("exception" as const),
                 },
               ],
             }
@@ -333,7 +333,7 @@ export function WarehouseProvider({ children }: { children: ReactNode }) {
                   at: Date.now(),
                   label: pass ? "Quality check passed" : "Quality check failed",
                   actor: "QC Station",
-                  kind: (pass ? "success" : "exception") as const,
+                  kind: pass ? ("success" as const) : ("exception" as const),
                 },
               ],
             }

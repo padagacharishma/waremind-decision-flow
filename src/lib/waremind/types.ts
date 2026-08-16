@@ -46,17 +46,17 @@ export interface Order {
   deadline: number;
   items: OrderItem[];
   status: OrderStatus;
-  picker?: string;
-  packer?: string;
-  qc?: "pending" | "pass" | "fail";
-  dispatchedAt?: number;
+  picker?: string | undefined;
+  packer?: string | undefined;
+  qc?: "pending" | "pass" | "fail" | undefined;
+  dispatchedAt?: number | undefined;
   timeline: TimelineEntry[];
 }
 
 export interface TimelineEntry {
   at: number;
   label: string;
-  detail?: string;
+  detail?: string | undefined;
   actor: string;
   kind: "info" | "exception" | "decision" | "resolution" | "success";
 }
@@ -74,15 +74,15 @@ export interface WarehouseException {
   kind: ExceptionKind;
   title: string;
   severity: "critical" | "warning" | "at-risk";
-  orderId?: string;
-  sku?: string;
+  orderId?: string | undefined;
+  sku?: string | undefined;
   problem: string;
   recommendation: string;
   reason: string;
   alternatives: { label: string; impact: string }[];
   status: "reported" | "investigating" | "action-recommended" | "resolved";
   createdAt: number;
-  resolvedAt?: number;
+  resolvedAt?: number | undefined;
   timeline: TimelineEntry[];
 }
 
@@ -93,8 +93,8 @@ export interface DecisionLog {
   title: string;
   detail: string;
   outcome: string;
-  relatedOrder?: string;
-  relatedSku?: string;
+  relatedOrder?: string | undefined;
+  relatedSku?: string | undefined;
 }
 
 export interface ActivityEntry {

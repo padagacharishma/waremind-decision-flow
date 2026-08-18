@@ -19,6 +19,7 @@ import { Route as ExceptionsRouteImport } from './routes/exceptions'
 import { Route as InventoryRouteImport } from './routes/inventory'
 import { Route as PackingRouteImport } from './routes/packing'
 import { Route as PickingRouteImport } from './routes/picking'
+import { Route as QualityRouteImport } from './routes/quality'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SimulatorRouteImport } from './routes/simulator'
 import { Route as OrdersIndexRouteImport } from './routes/orders.index'
@@ -74,6 +75,11 @@ const PickingRoute = PickingRouteImport.update({
   path: '/picking',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QualityRoute = QualityRouteImport.update({
+  id: '/quality',
+  path: '/quality',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -106,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/inventory': typeof InventoryRoute
   '/packing': typeof PackingRoute
   '/picking': typeof PickingRoute
+  '/quality': typeof QualityRoute
   '/settings': typeof SettingsRoute
   '/simulator': typeof SimulatorRoute
   '/orders/$orderId': typeof OrdersOrderIdRoute
@@ -122,6 +129,7 @@ export interface FileRoutesByTo {
   '/inventory': typeof InventoryRoute
   '/packing': typeof PackingRoute
   '/picking': typeof PickingRoute
+  '/quality': typeof QualityRoute
   '/settings': typeof SettingsRoute
   '/simulator': typeof SimulatorRoute
   '/orders/$orderId': typeof OrdersOrderIdRoute
@@ -139,6 +147,7 @@ export interface FileRoutesById {
   '/inventory': typeof InventoryRoute
   '/packing': typeof PackingRoute
   '/picking': typeof PickingRoute
+  '/quality': typeof QualityRoute
   '/settings': typeof SettingsRoute
   '/simulator': typeof SimulatorRoute
   '/orders/$orderId': typeof OrdersOrderIdRoute
@@ -157,6 +166,7 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/packing'
     | '/picking'
+    | '/quality'
     | '/settings'
     | '/simulator'
     | '/orders/$orderId'
@@ -173,6 +183,7 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/packing'
     | '/picking'
+    | '/quality'
     | '/settings'
     | '/simulator'
     | '/orders/$orderId'
@@ -189,6 +200,7 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/packing'
     | '/picking'
+    | '/quality'
     | '/settings'
     | '/simulator'
     | '/orders/$orderId'
@@ -206,6 +218,7 @@ export interface RootRouteChildren {
   InventoryRoute: typeof InventoryRoute
   PackingRoute: typeof PackingRoute
   PickingRoute: typeof PickingRoute
+  QualityRoute: typeof QualityRoute
   SettingsRoute: typeof SettingsRoute
   SimulatorRoute: typeof SimulatorRoute
   OrdersOrderIdRoute: typeof OrdersOrderIdRoute
@@ -284,6 +297,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PickingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/quality': {
+      id: '/quality'
+      path: '/quality'
+      fullPath: '/quality'
+      preLoaderRoute: typeof QualityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
@@ -326,6 +346,7 @@ const rootRouteChildren: RootRouteChildren = {
   InventoryRoute: InventoryRoute,
   PackingRoute: PackingRoute,
   PickingRoute: PickingRoute,
+  QualityRoute: QualityRoute,
   SettingsRoute: SettingsRoute,
   SimulatorRoute: SimulatorRoute,
   OrdersOrderIdRoute: OrdersOrderIdRoute,

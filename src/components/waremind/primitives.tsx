@@ -14,8 +14,12 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       </div>
       {!compact && (
         <div className="leading-tight">
-          <div className="font-display text-[15px] font-bold tracking-[0.16em] text-foreground">WAREMIND</div>
-          <div className="text-[10px] text-muted-foreground">Decision Engine</div>
+          <div className="font-display text-[13px] font-bold uppercase tracking-[0.12em] text-foreground">
+            Smart Warehouse
+          </div>
+          <div className="text-[9.5px] uppercase tracking-[0.14em] text-muted-foreground">
+            Operations &amp; Order Fulfillment
+          </div>
         </div>
       )}
     </div>

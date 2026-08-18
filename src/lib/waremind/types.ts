@@ -1,4 +1,4 @@
-export type Role = "manager" | "picker" | "packer" | "dispatch";
+export type Role = "manager" | "inventory" | "picker" | "packer" | "qc" | "dispatch";
 
 export type OrderStatus =
   | "created"

@@ -15,8 +15,10 @@ import {
   PackageCheck,
   Route as RouteIcon,
   Settings,
+  ShieldCheck,
   Split,
   Truck,
+  Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -34,26 +36,32 @@ import { useWarehouse } from "@/lib/waremind/store";
 import type { Role } from "@/lib/waremind/types";
 import { Logo, timeAgo } from "./primitives";
 
+const ALL: Role[] = ["manager", "inventory", "picker", "packer", "qc", "dispatch"];
+
 const NAV = [
-  { to: "/", label: "Dashboard", icon: LayoutDashboard, roles: ["manager", "picker", "packer", "dispatch"] },
-  { to: "/orders", label: "Orders", icon: ClipboardList, roles: ["manager", "dispatch"] },
-  { to: "/inventory", label: "Inventory", icon: Boxes, roles: ["manager"] },
-  { to: "/allocation", label: "Allocation", icon: Split, roles: ["manager"] },
+  { to: "/", label: "Command Center", icon: LayoutDashboard, roles: ALL },
+  { to: "/orders", label: "Orders", icon: ClipboardList, roles: ["manager", "inventory", "dispatch"] },
+  { to: "/inventory", label: "Inventory", icon: Boxes, roles: ["manager", "inventory"] },
+  { to: "/allocation", label: "Allocation", icon: Split, roles: ["manager", "inventory"] },
   { to: "/picking", label: "Picking", icon: RouteIcon, roles: ["manager", "picker"] },
   { to: "/packing", label: "Packing", icon: PackageCheck, roles: ["manager", "packer"] },
+  { to: "/quality", label: "Quality Check", icon: ShieldCheck, roles: ["manager", "qc", "packer"] },
   { to: "/dispatch", label: "Dispatch", icon: Truck, roles: ["manager", "dispatch"] },
-  { to: "/exceptions", label: "Exceptions", icon: AlertTriangle, roles: ["manager", "picker", "packer", "dispatch"] },
-  { to: "/analytics", label: "Analytics", icon: Gauge, roles: ["manager"] },
-  { to: "/simulator", label: "What-If Simulator", icon: FlaskConical, roles: ["manager"] },
-  { to: "/assistant", label: "AI Assistant", icon: Bot, roles: ["manager", "picker", "packer", "dispatch"] },
-  { to: "/decisions", label: "Decision History", icon: Activity, roles: ["manager"] },
-  { to: "/settings", label: "Settings", icon: Settings, roles: ["manager", "picker", "packer", "dispatch"] },
+  { to: "/exceptions", label: "Exception Control Tower", icon: AlertTriangle, roles: ALL },
+  { to: "/analytics", label: "Analytics", icon: Gauge, roles: ["manager", "inventory"] },
+  { to: "/simulator", label: "Decision Lab", icon: FlaskConical, roles: ["manager", "inventory"] },
+  { to: "/assistant", label: "AI Warehouse Assistant", icon: Bot, roles: ALL },
+  { to: "/decisions", label: "Decision History", icon: Activity, roles: ALL },
+  { to: "/users", label: "Users & Work", icon: Users, roles: ["manager"] },
+  { to: "/settings", label: "Settings", icon: Settings, roles: ALL },
 ] as const;
 
 const ROLE_LABEL: Record<Role, string> = {
   manager: "Warehouse Manager",
+  inventory: "Inventory Manager",
   picker: "Picker",
   packer: "Packer",
+  qc: "Quality Check",
   dispatch: "Dispatch Operator",
 };
 
@@ -190,8 +198,8 @@ export function AppShell({ children }: { children: ReactNode }) {
         <NavList collapsed={collapsed} />
         {!collapsed && (
           <div className="mx-3 rounded-xl border border-border/70 bg-background/40 p-3 text-[11px] text-muted-foreground">
-            <p className="font-display font-semibold text-foreground">WAREMIND</p>
-            <p className="mt-1">The decision engine for smarter warehouse operations.</p>
+            <p className="font-display font-semibold text-foreground">Warehouse Decision Engine</p>
+            <p className="mt-1">Detect · Decide · Recommend · Assign · Resolve.</p>
           </div>
         )}
       </aside>
